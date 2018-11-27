@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import MovieCard from './MovieCard';
+import CharacterCard from './CharacterCard';
 import axios from 'axios';
 
 import {
@@ -22,8 +22,8 @@ class App extends Component {
     super();
     this.state = {
       alertVisible: false,
-      title: '',
-      movies: []
+      name: '',
+      characters: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -35,11 +35,11 @@ class App extends Component {
     this.setState({ alertVisible: false });
   }
 
-  getAllMovies = () => {
+  getAllCharacters = () => {
     axios
-      .get('https://tranquil-springs-81691.herokuapp.com/getallmovies')
+      .get('https://still-citadel-47035.herokuapp.com/getallcharacters')
       .then(result => {
-        this.setState({ movies: result.data });
+        this.setState({ characters: result.data });
       })
       .catch(error => {
         console.log(error);
@@ -47,7 +47,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getAllMovies();
+    this.getAllCharacters();
   }
 
   //for form
@@ -55,8 +55,8 @@ class App extends Component {
     e.preventDefault();
     this.setState({ alertVisible: false });
 
-    const query = `https://tranquil-springs-81691.herokuapp.com/getmovie?title=${
-      this.state.title
+    const query = `https://still-citadel-47035.herokuapp.com/getcharacter?search=${
+      this.state.name
     }`;
 
     console.log(query);
@@ -68,7 +68,7 @@ class App extends Component {
         if (result.data === 'Not found') {
           this.setState({ alertVisible: true });
         }
-        this.getAllMovies();
+        this.getAllCharacters();
       })
       .catch(error => {
         alert('Error: ', error);
@@ -82,17 +82,17 @@ class App extends Component {
     });
   }
 
-  removeMovie(title) {
+  removeCharacter(name) {
     this.setState({
-      movies: this.state.movies.filter(movie => {
-        if (movie.title !== title) return movie;
+      characters: this.state.characters.filter(character => {
+        if (character.name !== name) return character;
       })
     });
-    const query = `https://tranquil-springs-81691.herokuapp.com/deletemovie?title=${title}`;
+    const query = `https://still-citadel-47035.herokuapp.com/deletecharacter?search=${name}`;
     axios
       .get(query)
       .then(result => {
-        this.getAllMovies();
+        this.getAllCharacters();
       })
       .catch(error => {
         alert('Error: ', error);
@@ -100,10 +100,10 @@ class App extends Component {
   }
 
   render() {
-    let movieCards = this.setState.movies.map(movie => {
+    let characterCards = this.setState.characters.map(character => {
       return (
-        <Col sm="4" key={movie.title}>
-          <MovieCard removeMovie={this.removeMovie.bind(this)} movie={movie} />
+        <Col sm="4" key={character.name}>
+          <CharacterCard removeCharacter={this.removeCharacter.bind(this)} character={character} />
         </Col>
       );
     });
@@ -111,8 +111,8 @@ class App extends Component {
       <div className="App">
         <Container>
           <Jumbotron id="jumboheader">
-            <h1 className="display-4">Movie Search</h1>
-            <p className="lead">Search for movies</p>
+            <h1 className="display-4">Character Search</h1>
+            <p className="lead">Search for Character</p>
           </Jumbotron>
           <Row>
             <Col>
@@ -121,7 +121,7 @@ class App extends Component {
                 isOpen={this.state.alertVisible}
                 toggle={this.onDismiss}
               >
-                Movie not found
+                Character not found
               </Alert>
             </Col>
           </Row>
@@ -129,12 +129,12 @@ class App extends Component {
             <Col>
               <Form onSubmit={this.onSubmit}>
                 <FormGroup>
-                  <Label for="title">Enter movie title</Label>
+                  <Label for="name">Enter Character name</Label>
                   <Input
                     type="text"
-                    name="title"
-                    id="title"
-                    placeholder="enter movie title..."
+                    name="name"
+                    id="name"
+                    placeholder="enter character name..."
                     onChange={this.onChange}
                   />
                 </FormGroup>
@@ -143,7 +143,7 @@ class App extends Component {
             </Col>
           </Row>
           <p />
-          <Row>{movieCards}</Row>
+          <Row>{characterCards}</Row>
         </Container>
       </div>
     );
