@@ -14,7 +14,6 @@ import {
   FormGroup,
   Label,
   Input,
-  FormText
 } from 'reactstrap';
 
 class App extends Component {
@@ -100,7 +99,7 @@ class App extends Component {
   }
 
   render() {
-    let characterCards = this.setState.characters.map(character => {
+    let characterCards = this.state.characters.map(character => {
       return (
         <Col sm="4" key={character.name}>
           <CharacterCard removeCharacter={this.removeCharacter.bind(this)} character={character} />
