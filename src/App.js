@@ -100,7 +100,7 @@ class App extends Component {
   }
 
   render() {
-    let movieCards = this.state.movies.map(movie => {
+    let movieCards = this.setState.movies.map(movie => {
       return (
         <Col sm="4" key={movie.title}>
           <MovieCard removeMovie={this.removeMovie.bind(this)} movie={movie} />
