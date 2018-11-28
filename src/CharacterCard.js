@@ -23,7 +23,7 @@ export class CharacterCard extends Component {
           <CardImg top width="100%" src={image} alt="Card image cap" />
           <CardBody>
             <CardTitle>{name}</CardTitle>
-            <CardText><b>Height: </b>{height}</CardText>
+            <CardText><b>Height: </b>{height} cm</CardText>
             <CardText><b>Mass: </b>{mass} lbs</CardText>
             <CardText><b>Gender: </b>{gender}</CardText>
             <Button
