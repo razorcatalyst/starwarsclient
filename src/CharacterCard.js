@@ -23,9 +23,9 @@ export class CharacterCard extends Component {
           <CardImg top width="100%" src={image} alt="Card image cap" />
           <CardBody>
             <CardTitle>{name}</CardTitle>
-            <CardSubtitle>{height}</CardSubtitle>
-            <CardText>{mass}</CardText>
-            <CardText>{gender}</CardText>
+            <CardSubtitle><b>Height: </b>{height}</CardSubtitle>
+            <CardText><b>Mass: </b>{mass}</CardText>
+            <CardText><b>Gender: </b>{gender}</CardText>
             <Button
               color="primary"
               onClick={() => this.props.removeCharacter(name)}

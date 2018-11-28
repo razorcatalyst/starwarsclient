@@ -36,7 +36,7 @@ class App extends Component {
 
   getAllCharacters = () => {
     axios
-      .get('https://still-citadel-47035.herokuapp.com/getallcharacters')
+      .get('https://starwarsserver-assignment.herokuapp.com/getallcharacters')
       .then(result => {
         this.setState({ characters: result.data });
       })
@@ -54,7 +54,7 @@ class App extends Component {
     e.preventDefault();
     this.setState({ alertVisible: false });
 
-    const query = `https://still-citadel-47035.herokuapp.com/getcharacter?search=${
+    const query = `https://starwarsserver-assignment.herokuapp.com/getcharacter?search=${
       this.state.name
     }`;
 
@@ -87,7 +87,7 @@ class App extends Component {
         if (character.name !== name) return character;
       })
     });
-    const query = `https://still-citadel-47035.herokuapp.com/deletecharacter?search=${name}`;
+    const query = `https://starwarsserver-assignment.herokuapp.com/deletecharacter?search=${name}`;
     axios
       .get(query)
       .then(result => {
@@ -110,8 +110,8 @@ class App extends Component {
       <div className="App">
         <Container>
           <Jumbotron id="jumboheader">
-            <h1 className="display-4">Character Search</h1>
-            <p className="lead">Search for Character</p>
+            <h1 className="display-4">Star Wars Character Search</h1>
+            <p className="lead">Search for any characters in the Star Wars saga!</p>
           </Jumbotron>
           <Row>
             <Col>
@@ -128,16 +128,16 @@ class App extends Component {
             <Col>
               <Form onSubmit={this.onSubmit}>
                 <FormGroup>
-                  <Label for="name">Enter Character name</Label>
+                  <Label for="name">Enter a character name</Label>
                   <Input
                     type="text"
                     name="name"
                     id="name"
-                    placeholder="enter character name..."
+                    placeholder="Enter a character name..."
                     onChange={this.onChange}
                   />
                 </FormGroup>
-                <Button color="primary">Submit</Button>
+                <Button color="primary">Search</Button>
               </Form>
             </Col>
           </Row>
